@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: conversor-react.herokuapp.com
+Token: ac5b4a46e1d8002f9057dc1fd57db26b9992b86c3094bfa4bde4655d3fb0800a
