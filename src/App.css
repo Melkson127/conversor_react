@@ -30,7 +30,7 @@ body{
     cursor: pointer;
     border: none;
     background: none;
-    margin-left: 150px;
+    margin-left: 170px;
     margin-top: -10px;
 }
 .conversor button img{
@@ -58,6 +58,6 @@ body{
         width: 350px;
     }
     .conversor button{
-        margin-left: 170px;
+        margin-left: 180px;
     }
 }
