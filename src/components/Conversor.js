@@ -3,7 +3,7 @@ import exchange from '../exchange.png'
 function Conversor(props) {
     const [moedaBv, setMoedaBv] = React.useState(0)
     const [moedaAv, setMoedaAv] = React.useState('')
-    
+    const [simbol, setSimbol] = React.useState('$')
     window.onload =()=>{
       const moedaA = document.getElementById('moedaA')
       const moedaB = document.getElementById('moedaB')
@@ -24,7 +24,8 @@ function Conversor(props) {
       fetch(url).then(res=> res.json()).then(json=>{
         const cot = json[de_para]
         const moedaB_val = (Number(moedaAv) * Number(cot))
-        
+        const getSymbol = props.symbol(moedaB.value)
+        getSymbol.then(res=>setSimbol(res))
         setMoedaBv(moedaB_val<0.01?moedaB_val.toFixed(8):moedaB_val.toFixed(2))
       })
     }else{
@@ -52,7 +53,7 @@ function Conversor(props) {
           
           <input type="number" placeholder="Valor a converter" onChange={(ev)=>{setMoedaAv(ev.target.value)}}/><br/><br/>
           <input type="button" value="converter" id='converter' className="converter" onClick={cotacao}/>
-          <h2>Valor Convertido: {moedaBv}</h2>
+          <h2>Valor Convertido: {simbol}{moedaBv} </h2>
          
         </div>
       </div>
