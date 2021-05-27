@@ -4,7 +4,18 @@ function Conversor(props) {
     const [moedaBv, setMoedaBv] = React.useState(0)
     const [moedaAv, setMoedaAv] = React.useState('')
     const [simbol, setSimbol] = React.useState('$')
+    const [list,setList] = React.useState({})
+    const linkLista = `https://free.currconv.com/api/v7/currencies?apiKey=6db3b3dc6b62d3927205`
+    
     window.onload =()=>{
+      fetch(linkLista).then(res=>res.json()).then(json=>{
+        setList(json.results)
+        Object.keys(json.results).forEach(ob=>{
+          const {currencyName, id} = json.results[ob]
+           document.getElementById("moedaA").innerHTML += `<option value='${ob}'>${currencyName} - ${id}</option>`
+           document.getElementById("moedaB").innerHTML += `<option value='${ob}'>${currencyName} - ${id}</option>`
+         })
+      })
       const moedaA = document.getElementById('moedaA')
       const moedaB = document.getElementById('moedaB')
       const btnTrocar = document.getElementById('trocar')
@@ -14,7 +25,7 @@ function Conversor(props) {
           moedaA['selectedIndex'] = moedaB['selectedIndex']
           moedaB['selectedIndex'] = modA
       }
-  }
+    }
   function cotacao(){
     const moedaA = document.getElementById('moedaA')
     const moedaB = document.getElementById('moedaB')
@@ -24,8 +35,8 @@ function Conversor(props) {
       fetch(url).then(res=> res.json()).then(json=>{
         const cot = json[de_para]
         const moedaB_val = (Number(moedaAv) * Number(cot))
-        const getSymbol = props.symbol(moedaB.value)
-        getSymbol.then(res=>setSimbol(res))
+        const {currencySymbol} = list[moedaB.value]
+        setSimbol(currencySymbol)
         setMoedaBv(moedaB_val<0.01?moedaB_val.toFixed(8):moedaB_val.toFixed(2))
       })
     }else{
