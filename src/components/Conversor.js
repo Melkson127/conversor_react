@@ -80,7 +80,7 @@ function Conversor(props) {
           let c = []
           dePara.forEach(el=>{
             c.push(el)
-          }) 
+          })  
           c.push(res)
           setdePara(c)
           const moedaB_val = (Number(moedaAv) * Number(cot))
