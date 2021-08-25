@@ -69,7 +69,6 @@ function Conversor(props) {
     if(moedaA.value !== 'null' && moedaB.value !== 'null'){
       const de_para = `${moedaA.value}_${moedaB.value}`
       let cache = dePara.filter(el=>el[de_para])
-      console.log(cache)
       if(cache.length>0){
         const moedaB_val = (Number(moedaAv) * Number(cache[0][de_para]))
         setMoedaBv(moedaB_val<0.01?moedaB_val.toFixed(8):moedaB_val.toFixed(2))
